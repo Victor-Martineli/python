@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/python-main.iml" filepath="$PROJECT_DIR$/.idea/python-main.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/aprender_python.iml" filepath="$PROJECT_DIR$/.idea/aprender_python.iml" />
+>>>>>>> b45b8cb (fist commit)
     </modules>
   </component>
 </project>

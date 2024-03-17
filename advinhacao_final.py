@@ -21,8 +21,6 @@ elif nivel == 3:
 print('Você selecionou o nivel {}, possui {} tentativas e {} pontos'.format(nivel, tentativas, pontuacao_inicial))
 
 
-
-
 pontos_restantes = pontuacao_inicial - penalidade
 
 for rodada in range(1, tentativas + 1):

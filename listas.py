@@ -44,3 +44,7 @@ print(lista3)
 
 lista3 *= 2
 print(lista3)
+
+# com esse loop podemos exibir cada valor separadamente
+for valor in lista3:
+    print(valor)

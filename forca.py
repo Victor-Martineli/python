@@ -46,5 +46,5 @@ def jogar():
 
     print('Fim de jogo!')
 
-jogar()
+
 

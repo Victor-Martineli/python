@@ -30,27 +30,48 @@ class Conta:
         # um valor padrão que pode ser alterado caso seja necessário, como o limite da conta
         print('Iniciazando uma conta')
         # self é a referência do objeto
-        self.numero = numero
-        self.titular = cliente
-        self.saldo = saldo
-        self.limite = limite
+        self._numero = numero
+        self._titular = cliente
+        self._saldo = saldo
+        self._limite = limite
         self.historico = Historico()
 
+# quando um elemento esta com um _ antes de seu nome indica que ele não deveria ser alterado de forma direta, porem como
+# no python não temos uma classe private isso ainda é possivel porem poderia ser desastroso, então seguimos a convenção
+# de não usa-los diretamente, então para modifica-los, usamos os getters e setters para atribuir e mudar seus valores.
+
+    def get_saldo(self):
+        return self._saldo
+
+    def set_saldo(self, saldo):
+        if saldo < 0:
+            print('Saldo não pode ser negativo')
+        else:
+            self._saldo = saldo
+
+    def get_titular(self):
+        return self._titular
+
+    def set_titular(self, titular):
+        self._titular = titular
+
     def deposita(self, valor):
-        self.saldo += valor
+        self._saldo += valor
         self.historico.transacoes.append('depósito de {}'.format(valor))
 
     def saca(self, valor):
-        if self.saldo < valor:
+        if self._saldo < 0:
+            print('saldo insuficiente')
+        elif self._saldo < valor:
             return False
         else:
-            self.saldo -= valor
+            self._saldo -= valor
             self.historico.transacoes.append('saque de {}'.format(valor))
             return True
 
     def extrato(self):
-        print('numero: {} \nsaldo: {}'.format(self.numero, self.saldo))
-        self.historico.transacoes.append('tirou extrato - saldo de {}'.format(self.saldo))
+        print('numero: {} \nsaldo: {}'.format(self._numero, self._saldo))
+        self.historico.transacoes.append('tirou extrato - saldo de {}'.format(self._saldo))
 
     def transfere_para(self, destino, valor):
         retirou = self.saca(valor)
@@ -63,15 +84,3 @@ class Conta:
 
 # quando criamos um novo objeto não precisamos do metodo __new__ pois o proprio python o está executando por baixo dos
 # panos, logo em seguida usa o metodo __init__ ptoda vez que criamos uma conta nova
-
-
-cliente1 = Cliente('Victor', 'Pierobon', '1234')
-c1 = Conta('123-4', cliente1, 500.0)
-cliente2 = Cliente('Gabriel', 'Viamonte', '2345')
-c2 = Conta('123-5', cliente2, 200.0)
-
-c1.deposita(100)
-c1.saca(75)
-c1.transfere_para(c2, 200)
-c1.extrato()
-c1.historico.imprime()

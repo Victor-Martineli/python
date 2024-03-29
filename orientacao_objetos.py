@@ -1,23 +1,23 @@
+class Conta:
+    _total_contas = 0
 
-def cria_conta(numero, titular, saldo, limite):
-    conta = {'numero': numero, 'titular': titular, 'saldo': saldo, 'limite': limite}
-    return conta
+    def __init__(self, saldo=0.0):
+        self._saldo = saldo
+        Conta._total_contas += 1
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @saldo.setter
+    def saldo(self, saldo):
+        if saldo < 0:
+            print('saldo não pode ser negativo')
+        else:
+            self._saldo = saldo
+
+    @staticmethod
+    def get_total_contas():
+        return Conta._total_contas
 
 
-def deposita(conta, valor):
-    conta['saldo'] += valor
-
-
-def saca(conta, valor):
-    conta['saldo'] -= valor
-
-
-def extrato(conta):
-    print('numero: {} \nsaldo: {}'.format(conta['numero'], conta['saldo']))
-
-conta = cria_conta('123-4', 'Victor', 120.0, 1000.0)
-deposita(conta, 15.0)
-extrato(conta)
-
-saca(conta, 20.0)
-extrato(conta)

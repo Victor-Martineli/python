@@ -6,7 +6,7 @@ class Funcionario:
         self._salario = salario
 
     def get_bonificacao(self):
-        return self._salario * 0.10 + 1000
+        return self._salario * 1.2
 
 
 class Gerente(Funcionario):
@@ -26,3 +26,13 @@ class Gerente(Funcionario):
 
     def get_bonificacao(self):
         return super().get_bonificacao() + 1000
+
+class ControleBonificacoes:
+    def __init__(self, total_bonificacoes=0):
+        self._total_bonificacoes = total_bonificacoes
+
+    def registra(self, obj):
+        if hasattr(obj, 'get_bonificacao'):
+            self._total_bonificacoes += obj.get_bonificacao()
+        else:
+            print('instância de {} não implementa o metodo get_bonificacao()'.format(self.__class__.__name__))
